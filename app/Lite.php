@@ -31,16 +31,17 @@ class Lite
 		);
   }
   
-  public function router($route) {
+  public function router($route)
+  {
     global $cfg;
 
     $route = self::parse($route);
-    //print SRC . 'pages' . DS . $route . self::$extension;
+    //print 'controllers' . DS . $route . self::$extension;
 
-    if(file_exists(SRC . 'pages' . DS . $route . self::$extension)) {
-      include SRC . 'pages' . DS . $route . self::$extension;
+    if(file_exists('controllers' . DS . $route . self::$extension)) {
+      include 'controllers' . DS . $route . self::$extension;
     } else {
-      include SRC . 'pages' . DS . "error" . DS . "404" . self::$extension;
+      include 'controllers' . DS . "error" . DS . "404" . self::$extension;
     }
 
   }
@@ -55,27 +56,30 @@ class Lite
     return $route;
   }
 
-	public static function load ($path = FALSE) {
+  public static function load ($path = FALSE)
+  {
 		if ($path) {
-      if (file_exists(SRC . 'templates' . DS . "{$path}" . ".html")) {
-        return file_get_contents(SRC . 'templates' . DS . "{$path}" . ".html");
+      if (file_exists(SRC . 'views' . DS . "{$path}" . ".html")) {
+        return file_get_contents(SRC . 'views' . DS . "{$path}" . ".html");
 			}
     }
     
 		return FALSE;
 	}
 
-	public static function loade ($path = FALSE) {
+  public static function loade ($path = FALSE)
+  {
 		if ($path) {
-			if (file_exists(SRC . 'templates' . DS . "components" . DS . "{$path}" . ".html")) {
-        return file_get_contents(SRC .'templates'."components" . DS . "{$path}" . ".html");
+			if (file_exists(SRC . 'views' . DS . "components" . DS . "{$path}" . ".html")) {
+        return file_get_contents(SRC .'views'."components" . DS . "{$path}" . ".html");
 			}
 		}
 
 		return false;
 	}
 
-	public static function minifyPage($buffer) {
+  public static function minifyPage($buffer)
+  {
 		/* origin http://jesin.tk/how-to-use-php-to-minify-html-output/ */
 		$search = array('/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s');
 
@@ -90,9 +94,12 @@ class Lite
 		return $buffer;
   }
 
-  public static function render($tpl) {
+  public static function render($tpl)
+  {
+    global $cfg;
+
     if(is_string($tpl)) {
-      self:: $build = $tpl;
+      self:: $build = self::c2r(["lite-path" => $cfg->path], $tpl);
     } else {
       self:: $build = ".::RENDER::.::ERROR::.";
     }
