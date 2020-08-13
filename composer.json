@@ -1,5 +1,6 @@
 {
     "name": "rdnine/lite",
+    "description": "Lightweight PHP",
     "type": "framework",
     "license": "MIT",
     "authors": [
@@ -8,5 +9,19 @@
             "email": "rafael@rdnine.dev"
         }
     ],
-    "require": {}
+    "require": {},
+    "config": {
+      "vendor-dir": "./vendor/",
+      "optimize-autoloader": true,
+      "preferred-install": "dist",
+      "sort-packages": true
+    },
+    "autoload": {
+      "psr-4": {
+        "": "app/"
+      },
+      "files": [
+        "app/Paths.php"
+      ]
+    }
 }
