@@ -1,0 +1,12 @@
+{
+    "name": "rdnine/lite",
+    "type": "framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rafael",
+            "email": "rafael@rdnine.dev"
+        }
+    ],
+    "require": {}
+}
