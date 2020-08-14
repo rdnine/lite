@@ -21,6 +21,8 @@ require __DIR__.'/vendor/autoload.php';
 
 $cfg = require __DIR__. '/app/Config.php';
 
+$routes = require __DIR__. '/app/Routes.php';
+
 /*
 |--------------------------------------------------------------------------
 | Ignite
@@ -30,16 +32,8 @@ $cfg = require __DIR__. '/app/Config.php';
 |
 */
 
-$uri = str_replace($cfg->path, '', $_SERVER['REQUEST_URI']);
+$request = str_replace($cfg->path, '', $_SERVER['REQUEST_URI']);
 
-$uri = explode("/", $uri);
-
-if($uri[1] != "") {
-  $request = $uri[1];
-} else {
-  $request = $cfg->start;
-}
-
-$app = new Lite($request);
+$app = new Lite($cfg, $routes, $request);
 
 $app::run();

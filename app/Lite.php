@@ -5,10 +5,15 @@ class Lite
   public static $request;
   public static $extension = '.php';
 
+  public static $cfg;
+  public static $routes = [];
+
   public static $build = "";
 
-  public function __construct($request = "/") {
-    self::$request = $request;
+  public function __construct($config, $routes, $request = "/") {
+    self::$cfg = $config;
+    self::$routes = $routes;
+    self::$request = !empty($request) ? $request : "/";
 
     self::router($request);
   }
@@ -33,17 +38,17 @@ class Lite
   
   public function router($route)
   {
-    global $cfg;
-
     $route = self::parse($route);
-    //print 'controllers' . DS . $route . self::$extension;
 
-    if(file_exists('controllers' . DS . $route . self::$extension)) {
-      include 'controllers' . DS . $route . self::$extension;
+    if(array_key_exists($route, self::$routes)) {
+      if(file_exists('controllers' . DS . self::$routes[$route] . self::$extension)) {
+        include 'controllers' . DS . self::$routes[$route] . self::$extension;
+      } else {
+        include 'controllers' . DS . "error" . DS . "404" . self::$extension;
+      }
     } else {
       include 'controllers' . DS . "error" . DS . "404" . self::$extension;
     }
-
   }
 
   public function parse($route)
@@ -96,10 +101,9 @@ class Lite
 
   public static function render($tpl)
   {
-    global $cfg;
 
     if(is_string($tpl)) {
-      self:: $build = self::c2r(["lite-path" => $cfg->path], $tpl);
+      self:: $build = self::c2r(["lite-path" => self::$cfg->path], $tpl);
     } else {
       self:: $build = ".::RENDER::.::ERROR::.";
     }
