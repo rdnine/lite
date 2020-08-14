@@ -20,6 +20,10 @@ if (!defined('APP')) {
     define('APP', ROOT . DS . 'app' . DS);
 }
 
-if (!defined('PUBLIC')) {
-    define('PUBLIC', ROOT . DS . 'public' . DS);
+if (!defined('CONTROLLERS')) {
+    define('CONTROLLERS', ROOT . DS . 'controllers' . DS);
+}
+
+if (!defined('STATIC')) {
+    define('STATIC', ROOT . DS . 'static' . DS);
 }
