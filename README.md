@@ -2,6 +2,6 @@
 
 ## Simple, lightweight, and fast PHP development and integration with Front-End
 
-It uses the simpliest of routing systems going directly for the file itself.
+Here you work directly on html and use a simple routing array system.
 
 Documentation comming soon...
