@@ -12,7 +12,7 @@ return (object) [
   'start' => 'hello',
 
   'version' => '0.0.1',
-  'sub_version' => 'alpha',
+  'sub_version' => 'beta',
 
   "cookie" => "cookie_name",
   "cookie_time" => 86400 // represents 1 day, 60 seconds * 60 minutes * 24 hours
