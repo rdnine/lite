@@ -71,7 +71,7 @@ class Lite
   {
 		if ($path) {
 			if (file_exists(SRC . 'views' . DS . "components" . DS . "{$path}" . ".html")) {
-        return file_get_contents(SRC .'views'."components" . DS . "{$path}" . ".html");
+        return file_get_contents(SRC .'views' . DS . "components" . DS . "{$path}" . ".html");
 			}
 		}
 
